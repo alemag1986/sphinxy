@@ -6,6 +6,9 @@ class IncorrectAnswer(Exception):
 
 
 class Sphinx:
+    """_summary_
+    """
+    
     def __init__(self, name: str):
         self._name = name
         self._riddle = Riddle(
@@ -17,6 +20,11 @@ class Sphinx:
         )
 
     def introduce(self) -> str:
+        """_summary_
+
+        Returns:
+            str: _description_
+        """
         return (
             f"Greetings, mortals. I am {self._name}. I have guarded the city of Thebes"
             "for centuries and posed riddles to those who dared to approach me."
@@ -27,6 +35,17 @@ class Sphinx:
         return "I have updated my riddle. Are you ready to solve it?"
 
     def pose_riddle(self, include_hint: bool = False) -> tuple[str, str | None]:
+        """_summary_
+
+        Args:
+            include_hint (bool, optional): _description_. Defaults to False.
+
+        Raises:
+            IncorrectAnswer: _description_
+
+        Returns:
+            tuple[str, str | None]: _description_
+        """
         hint = (
             f"Hint: The answer starts with the letter '{self._riddle.get_hint()}'."
             if include_hint
@@ -35,6 +54,20 @@ class Sphinx:
         return (self._riddle.question, hint)
 
     def check_riddle_answer(self, answer: str, return_hint: bool = False) -> str:
+        """Evaluates the given answer to the riddle.
+
+        Args:
+            answer (str): The given answer to the riddle.
+            return_hint (bool, optional): Controls whether a hint for the riddle should
+                be returned. Defaults to False.
+
+        Raises:
+            IncorrectAnswer: Exception for incorrect answer.
+
+        Returns:
+            str: The result of the evaluation of the answer.
+        """
+
         if self._riddle.check_answer(answer):
             return "Your answer was correct. You may pass."
         elif return_hint:
